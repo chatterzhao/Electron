@@ -40,6 +40,7 @@ Windows 系统下载后直接下一步下一步，按默认选项安装即可，
 
 Electron 依赖 Node.js，所以要先下载并安装 Node.js，不过您得先确定要装哪个版本的 Electron，然后下载对应的 Node.js 版本，比如我这里是用Electron 5.0.1，我下载的 Node.js 是12.1.0。
 ![图片](https://uploader.shimo.im/f/cEY0bQOK9SobYhUT.png!thumbnail)
+各版本如图
 Windows 系统下载后直接下一步下一步，按默认选项安装即可，这里不再讲安装。npm 是包管理器，它会一起安装，下面将用到它。
 **下载并安装：**[http://nodejs.cn/download/](http://nodejs.cn/download/)
 检查安装是否成功，在 VSCode 终端工具上执行命令：
@@ -304,22 +305,38 @@ git commit -m "提交备注"
 >这里推荐选择的远程仓库平台有：
 >码云：[https://gitee.com/](https://gitee.com/)，私有仓库也免费，生态差一点。
 >GitHub：[https://github.com](https://github.com/)，私有仓库收费，生态比较好一点。
+>下面我们讲 GitHub，先用邮箱注册一个账号即可，后面设置到 username，这里取好听一点，不过后面可改，这个是公开的，比如PG大神德哥的 GitHub 地址：[https://github.com/digoal](https://github.com/digoal) 上的digoal。
 ### **5.1 创建 SSH Key**
-在项目目录右键，打开 Git Bash Here，然后输入如下命令
+在项目目录右键，打开 Git Bash Here，然后输入如下命令，注意替换双引号里面的内容，然后一路回车，遇到要输入 y/n，输入 y 同意
 ```
 ssh-keygen -t rsa -C "youremail@example.com"
 ```
+>如果您的 github 地址是：[https://github.com/lixiang](https://github.com/lixiang)，那么你上面的"youremail@example.com"改为"lixiang@github.com"
+>
 >本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，远程推送需要验证身份，所以需要设置，打开Git Bash，创建SSH Key。
->邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人，这里就放GitHub，打开“Account settings”，“SSH Keys”页面，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”按钮提交。
->您可能会留意到，还可以用 https，如：[https://github.com/lixiang/ElectronDemo](https://github.com/lixiang/ElectronDemo).git，来连接，这里不推荐，用它速度会慢一点，另外每次连接要输入密码，有点麻烦。
+>邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人，这里就放GitHub。
+>![图片](https://uploader.shimo.im/f/iPUgZB4my5MsIj5H.png!thumbnail)
+>生成的文件类似这样
+
+创建过程，命令行退显示这个文件创建后在那个目录，可以到那个目录找到 id_rsa.pub ，然后在 GitHub 官网
+* 右上角头像有个倒三角小图，到里面，点开 “Settings”
+* 左侧竖排导航，点开 “SSH and GPG keys”
+* 点击“New SSH key” 按钮
+* Title 标题随便写，不过因为这个是每台电脑不一样，标题最好写明是您哪台电脑的
+* Key 应该填写的是在本地电脑执行命令生成的 id_rsa.pub 文件里的内容，用**记事本**打开，全选，复制，粘贴到Key这里
+* 点 “Add SSH key”按钮，提交，操作完成
+>您可能还会留意到有教程，还可以用 https，如：[https://github.com/lixiang/ElectronDemo](https://github.com/lixiang/ElectronDemo).git，来连接，这里不推荐，用它速度会慢一点，另外每次连接要输入密码，有点麻烦。
 ### **5.2 创建一个新的仓库**
 在 Git Hub 右上角找到 “Create a new repo” 按钮，填写仓库名 ElectronDemo ，然后点击 “Create repository” 按钮创建一个仓库。
+>这里不用勾选生成 README，如果勾选了，后面第一次本地与远程同步，需要先 git pull 拉远程的到本地，然后 git push 推上去，我们今天只是入门，所以不建议大家搞复杂了。
+
 ### **5.3 本地仓库与远程仓库关联**
 在本地项目文件夹里空白处右键，打开 Git Bash Here，然后输入如下命令
 ```
 git remote add origin git@github.com:lixiang/ElectronDemo.git
 ```
->把上面的 lixiang 替换成你自己的 GitHub 账户名，否则您无法把您本地的项目推送到 Git Hub 仓库的，因为你本地没有我的 id_rsa.pub 公钥。
+>把上面的 lixiang 替换成你自己的 GitHub 账户名，否则您无法把您本地的项目推送到 Git Hub 仓库的，因为你本地没有我的 id_rsa.pub 公钥。ElectronDemo 替换成 Github 官网上的仓库名称（repository)，注意 Github 上的仓库名称，**不支持中文**
+>执行命令如果提示：fatal: remote origin already exists. 它的意思是远程起源已经存在。那么执行：git remote rm origin 然后再重新执行 git remote add origin ......
 ### 5.4 本地库的 master 分支推送到 远程库
 在本地项目文件夹里空白处右键，打开 Git Bash Here，然后输入如下命令
 ```
@@ -329,6 +346,8 @@ git push -u origin master
 
 至此，本地仓库的内容就与远程仓库的内容一致了。
 关于远程仓库我们本教程就到这里，其他内容建议学习上面的 Git 教程，真心写的好。
+### 5.5 接下来本地库有 git commit -m "提交备注" 后，如果要同步到远程 Github 操作如下：
+
 # 六、生产版本管理
 生产版本管理，要根据下面这样的语义规则来，比如2.0.0跟1.5.3之间，应该是有 API 突破性变更，或者 Node.js 重大版本跟新，或者 Chromium 版本更新了，才能改最前面的一位，不是随意编出来的，我们发布版本时版本编号应该如下这样来确定每位的增加。
 ![图片](https://uploader.shimo.im/f/owfMS0akhQINsMcj.png!thumbnail)这里不再赘述，直接上别人的教程，今天可以不用深读。
