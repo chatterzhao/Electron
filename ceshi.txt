@@ -1,14 +1,9 @@
 <view class="page__bd">
-    <view class="weui-panel weui-panel_access">
-        <view class="weui-panel__bd" wx:for="{{movies}}" wx:for-item="movies" wx:key="*item">
-            <navigator url="" class="weui-media-box weui-meida-box_appmsg" hover-class="weui-cell_active">
-                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" mode="widthFix" src="{{movies.img}}" sytle="height:auto"></image>
-                </view>
-                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title">{{movies.name}}</view>
-                    <view class="weui-media-box__desc">{{movies.desc}}</view>
-                </view>
+    <view class="weui-grids>
+        <view wx:for="{{grids}}" wx:for-item="grids" wx:key="*this">
+            <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+                <image class="weui-grid__icon">{{grids.imgurl}}</image>
+                <view class="weui-grid__label">{{grids.title}}</view>
             </navigator>
         </view>
     </view>
